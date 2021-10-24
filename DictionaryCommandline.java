@@ -13,4 +13,9 @@ public class DictionaryCommandline {
         man.insertFromCommandline();
         this.showAllWords();
     }
+    public void dictionaryAdvance() {
+        man.insertFromFile();
+        this.showAllWords();
+        //man.dictionaryLookup();
+    }
 }

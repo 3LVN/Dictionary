@@ -1,7 +1,6 @@
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Scanner;
@@ -58,7 +57,7 @@ public class DictionaryManagement {
         
    }
 
-   public void writeToFile() {
+   public void exportToFile() {
        try {
            File fout = new File("dictionary.txt");
            FileOutputStream fos = new FileOutputStream(fout);
@@ -80,7 +79,81 @@ public class DictionaryManagement {
 
    public void dictionaryLookup() {
        System.out.println("Nhap tu can tim");
-        for
+        Scanner toLook = new Scanner(System.in);
+        String key = toLook.nextLine();
+        toLook.close();
+        for(int i = 0; i< dict.Word.size(); i++) {
+            Word index = dict.Word.get(i);
+            if(index.getTarget().contains(key) || index.getExplain().contains(key) ) {
+                String s = i+1 + "\t| " + index.getTarget() + "\t\t| " + index.getExplain();
+                System.out.println(s);
+                break;
+            }
+        }
    }
+   public int wordSearcher(String key) {
+    int i = 0;
+    for(; i< dict.Word.size(); i++) {
+        Word index = dict.Word.get(i);
+        if(index.getTarget().contains(key) || index.getExplain().contains(key) ) {
+            break;
+        }
+    }
+    return i;
+   }
+
+   public void addWord() {
+       System.out.println("Them tu moi:");
+       Scanner add = new Scanner(System.in);
+        String en = add.nextLine();
+        String vn = add.nextLine();
+        add.close();
+        dict.Word.add(new Word(en, vn));
+   }
+
+   public void editWord() {
+       System.out.println("Tim tu can sua:");
+        Scanner edit = new Scanner(System.in);
+        String find = edit.nextLine();
+        int i = wordSearcher(find);
+        Word index = dict.Word.get(i);
+        String s = i+1 + "\t| " + index.getTarget() + "\t\t| " + index.getExplain();
+        System.out.println(s);
+        System.out.println("Sua tu duoc chon:");
+        String en = edit.nextLine();
+        String vn = edit.nextLine();
+        edit.close();
+        dict.Word.get(i).setTarget(en);
+        dict.Word.get(i).setExplain(vn);
+
+   }
+
+   public void delWord() {
+        System.out.println("Tim tu can xoa:");
+        Scanner edit = new Scanner(System.in);
+        String find = edit.nextLine();
+        edit.close();
+        int i = wordSearcher(find);
+        Word index = dict.Word.get(i);
+        String s = i+1 + "\t| " + index.getTarget() + "\t\t| " + index.getExplain();
+        System.out.println(s);
+        dict.Word.remove(i);
+        System.out.println("Tu da duoc xoa.");
+    }
+
+    public void dictionarySeacher() {
+        System.out.println("Nhap cac tu can tim:");
+        Scanner toLook = new Scanner(System.in);
+        String key = toLook.nextLine();
+        toLook.close();
+        for(int i = 0; i< dict.Word.size(); i++) {
+            Word index = dict.Word.get(i);
+            if(index.getTarget().contains(key)) {
+                String s = i+1 + "\t| " + index.getTarget() + "\t\t| " + index.getExplain();
+                System.out.println(s);
+            }
+        }
+    }
+
 
 }

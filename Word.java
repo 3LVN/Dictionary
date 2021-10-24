@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 public class Word {
     private String word_target, word_explain;   
     
@@ -19,5 +21,14 @@ public class Word {
         this.word_explain = exp;
         this.word_target = tar;
     }
+    /*public static Comparator<Word> alphabetComp = new Comparator<Word>(){
+        public int compare(Word w1, Word w2) {
+            String en1 = w1.getTarget();
+            String en2 = w2.getTarget();
+            return en1.compareTo(en2);
+        }
+
+    };*/
+    
     
 }

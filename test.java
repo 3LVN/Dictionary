@@ -16,7 +16,8 @@ public static void main(String args[])
         //com.dictionaryBasic();
         //com.man.createFile();
         //com.man.writeToFile();
-        com.man.insertFromFile();
+        com.dictionaryAdvance();
+        com.man.delWord();
         com.showAllWords();
     }  
 }  
