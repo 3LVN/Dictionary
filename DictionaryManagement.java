@@ -154,6 +154,18 @@ public class DictionaryManagement {
             }
         }
     }
-
+    public int[] searchList(String s) {
+        int[] search = new int[100];
+        int j = 0;
+        for(int i = 0; i< dict.Word.size(); i++) {
+            Word index = dict.Word.get(i);
+            if(index.getTarget().contains(s)){
+                search[j] = i;
+                j++;
+                if(j == 98) break;  
+            }
+        }
+        return search;
+    }
 
 }
