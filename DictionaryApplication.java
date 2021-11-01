@@ -93,6 +93,7 @@ public class DictionaryApplication{
         reEdit.setBounds(300, 170, 180, 25);
         reEdit.setForeground(Color.green);
 
+        f.getContentPane().add(reEdit);
         f.getContentPane().add(editText);
         f.getContentPane().add(edit);
         f.getContentPane().add(editButtonEn);
@@ -103,7 +104,10 @@ public class DictionaryApplication{
                 String ed = edit.getText();
                 String key = leftList.getSelectedValue();
                 int found = com.man.wordSearcher(key);
-                com.man.dict.Word.get(found).setTarget(ed);
+                if(ed.split("\\s")[0].length() == ed.length()){
+                    com.man.dict.Word.get(found).setTarget(ed + " NULL");
+                }
+                else com.man.dict.Word.get(found).setTarget(ed);
                 reEdit.setText("Đã chỉnh sửa từ.");
                 }
             });
@@ -172,6 +176,13 @@ public class DictionaryApplication{
         f.setVisible(true);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         SwingUtilities.updateComponentTreeUI(f);
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e){
+                com.man.exportToFile();
+                System.out.println("File saved");
+                e.getWindow().dispose();
+            }
+        });
     }
     
 
