@@ -104,10 +104,13 @@ public class DictionaryApplication{
                 String ed = edit.getText();
                 String key = leftList.getSelectedValue();
                 int found = com.man.wordSearcher(key);
-                if(ed.split("\\s")[0].length() == ed.length()){
-                    com.man.dict.Word.get(found).setTarget(ed + " NULL");
+                try {
+                    com.man.dict.Word.get(found).setTarget(ed.split("\\s")[0]+" "+ ed.split("\\s")[1]);
+                    
                 }
-                else com.man.dict.Word.get(found).setTarget(ed);
+                catch(ArrayIndexOutOfBoundsException ex) {
+                    com.man.dict.Word.get(found).setTarget(ed.split("\\s")[0]+" NULL");
+                }
                 reEdit.setText("Đã chỉnh sửa từ.");
                 }
             });
@@ -141,11 +144,17 @@ public class DictionaryApplication{
             public void actionPerformed(ActionEvent e){
                 String ad = addW.getText();
                 String en ="", vn = "";
-                if(ad.split("\\s")[1] == null) vn = " ";
-                if(ad.split("\\s")[2] == null) en = ad.split("\\s")[0];
-                else {
+                try{
+                   vn = ad.split("\\s")[1]  ;
+                }
+                catch(ArrayIndexOutOfBoundsException ex){
+                    vn = "NULL";
+                }
+                try {
                     en = ad.split("\\s")[0] +" "+ ad.split("\\s")[2];
-                    vn = ad.split("\\s")[1];
+                }
+                catch(ArrayIndexOutOfBoundsException ex){
+                    en = ad.split("\\s")[0] + " NULL";
                 }
                 com.man.dict.Word.add(new Word(en, vn));
                 reAdd.setText("Từ "+ ad.split("\\s")[0] + " đã được thêm");
